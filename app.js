@@ -28,6 +28,45 @@ const render = require("./lib/htmlRenderer");
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
 
+const managerQ = [
+    {
+        type: "input",
+        name: "name",
+        message: "What is your manager name?"
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "What is your manager's email?"
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "What is your manager's id?"
+    },
+    {
+        type: "input",
+        name: "officeNumber",
+        message: "What is your office number?"
+    },
+    {
+        type: "list",
+        name: "team",
+        message: "Which type of team member would you like to add? "
+    }
+];
+
+// const engineerQ = [
+//     {
+//         type: "input",
+//         name: "name",
+//         message: "What is your Engineer's name?"
+//     },
+//     {
+//         type: "input",
+//     }
+// ]
+
 
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
 // and Intern classes should all extend from a class named Employee; see the directions
