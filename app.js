@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -28,90 +29,125 @@ const render = require("./lib/htmlRenderer");
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
 
-const managerQ = [
-    {
-        type: "input",
-        name: "name",
-        message: "What is your manager name?"
-    },
-    {
-        type: "input",
-        name: "email",
-        message: "What is your manager's email?"
-    },
-    {
-        type: "input",
-        name: "id",
-        message: "What is your manager's id?"
-    },
-    {
-        type: "input",
-        name: "officeNumber",
-        message: "What is your office number?"
-    },
-    {
-        type: "list",
-        name: "team",
-        message: "Would you like to add any team members?",
-        choices: ["Yes" , "No"]
-    }
-];
 
-const engineerQ = [
+var teamList = [];
+const managerQuestions = [
     {
         type: "input",
         name: "name",
-        message: "What is the engineer's name?"
-    },{
-        type: "input",
-        name: "email",
-        message: "What is the engineer's email?"
-    } ,
-    {
-        type: "input",
-        name: "id",
-        message: "What is your engineer's id?"
-    },
-    {
-        type: "input",
-        name: "github",
-        message: "What is your github username?"
-    },
-    {
-        type: "list",
-        name: "team",
-        message: "Would you like to add any team members?",
-        choices: ["Yes" , "No"]
-    }
-];
+        message: "Enter manager's name:",
 
-const interQ = [
-    {
-        type: "input",
-        name: "name",
-        message: "What is the intern's name?"
-    },{
-        type: "input",
-        name: "email",
-        message: "What is the intern's email?"
-    } ,
-    {
-        type: "input",
-        name: "id",
-        message: "What is your inters's id?"
     },
     {
         type: "input",
-        name: "github",
-        message: "What is your intern's school name?"
+        name: "id",
+        message: "Enter ID number:"
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "Enter manager's email:",
+
+    },
+    {
+        type: "input",
+        name: "officeNum",
+        message: "Enter office number:",
     },
     {
         type: "list",
         name: "team",
-        message: "Would you like to add any team members?",
-        choices: ["Yes" , "No"]
+        message: "Do you have any team members?",
+        choices: ["Yes", "No"]
     }
 ]
+
+const employeeQuestions = [
+    {
+        type: "input",
+        name: "name",
+        message: "Enter employee's name:",
+
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "Enter employee's email:",
+
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "Enter ID number:"
+    },
+    {
+        type: "list",
+        name: "role",
+        message: "What is their role?",
+        choices: ["Engineer", "Intern"]
+    },
+    {
+        when: input => {
+            return input.role == "Engineer"
+        },
+        type: "input",
+        name: "github",
+        message: "Enter your github username:",
+
+    },
+    {
+        when: input => {
+            return input.role == "Intern"
+        },
+        type: "input",
+        name: "school",
+        message: "Enter your school name:",
+
+    },
+    {
+        type: "list",
+        name: "addAnother",
+        message: "Add another team member?",
+        choices: ["Yes", "No"]
+    }
+]
+
+function buildTeamList() {
+    inquirer.prompt(employeeQuestions).then(employeeInfo => {
+        if (employeeInfo.role == "Engineer") {
+            var newMember = new Engineer(employeeInfo.name, employeeInfo.id, employeeInfo.email, employeeInfo.github);
+        } else {
+            var newMember = new Intern(employeeInfo.name, employeeInfo.id, employeeInfo.email, employeeInfo.school);
+        }
+        teamList.push(newMember);
+        if (employeeInfo.addAnother === "Yes") {
+            console.log(" ");
+            buildTeamList();
+        } else {
+            buildHtmlPage();
+        }
+    })
+}
+
+function buildHtmlPage() {
+        fs.writeFileSync(outputPath, render(teamList)); 
+};
+
+
+function init() {
+    inquirer.prompt(managerQuestions).then(managerInfo => {
+        let teamManager = new Manager(managerInfo.name, managerInfo.id, managerInfo.email, managerInfo.officeNum);
+        teamList.push(teamManager);
+        console.log(" ");
+        if (managerInfo.team === "Yes") {
+            buildTeamList();
+        } else {
+            buildHtmlPage();
+        }
+    })
+}
+
+init();
 
 
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
