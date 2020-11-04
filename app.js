@@ -130,7 +130,7 @@ function buildTeamList() {
 }
 
 function buildHtmlPage() {
-        fs.writeFileSync(outputPath, render(teamList)); 
+    fs.writeFileSync(outputPath, render(teamList));
 };
 
 
