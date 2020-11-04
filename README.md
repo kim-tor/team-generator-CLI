@@ -21,7 +21,10 @@ To create this generator I required in the inquirer npm package to allow me to p
 The dependencies are, [jest](https://jestjs.io/) for running the provided tests, and [inquirer](https://www.npmjs.com/package/inquirer) for collecting input from the user.
 
 ## Usage
-* ![Passing Test Screenshot ](test.suite.screenshot.JPG)
+* ![Passing Test Screenshot](test.suite.screenshot.JPG)
+* Link to Google Drive video of demo (https://drive.google.com/file/d/1sb68D2c5-sBBMN2MVsJCNHFQh3NtvBrz/view)
+* ![TeamGIF] (team-generator.gif)
+
 
 ## Resources
 
