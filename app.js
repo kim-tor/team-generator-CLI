@@ -52,20 +52,66 @@ const managerQ = [
     {
         type: "list",
         name: "team",
-        message: "Which type of team member would you like to add? "
+        message: "Would you like to add any team members?",
+        choices: ["Yes" , "No"]
     }
 ];
 
-// const engineerQ = [
-//     {
-//         type: "input",
-//         name: "name",
-//         message: "What is your Engineer's name?"
-//     },
-//     {
-//         type: "input",
-//     }
-// ]
+const engineerQ = [
+    {
+        type: "input",
+        name: "name",
+        message: "What is the engineer's name?"
+    },{
+        type: "input",
+        name: "email",
+        message: "What is the engineer's email?"
+    } ,
+    {
+        type: "input",
+        name: "id",
+        message: "What is your engineer's id?"
+    },
+    {
+        type: "input",
+        name: "github",
+        message: "What is your github username?"
+    },
+    {
+        type: "list",
+        name: "team",
+        message: "Would you like to add any team members?",
+        choices: ["Yes" , "No"]
+    }
+];
+
+const interQ = [
+    {
+        type: "input",
+        name: "name",
+        message: "What is the intern's name?"
+    },{
+        type: "input",
+        name: "email",
+        message: "What is the intern's email?"
+    } ,
+    {
+        type: "input",
+        name: "id",
+        message: "What is your inters's id?"
+    },
+    {
+        type: "input",
+        name: "github",
+        message: "What is your intern's school name?"
+    },
+    {
+        type: "list",
+        name: "team",
+        message: "Would you like to add any team members?",
+        choices: ["Yes" , "No"]
+    }
+]
 
 
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
