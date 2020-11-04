@@ -22,8 +22,9 @@ The dependencies are, [jest](https://jestjs.io/) for running the provided tests,
 
 ## Usage
 * ![Passing Test Screenshot](test.suite.screenshot.JPG)
+* ![TeamGIF](team-generator.gif)
 * Link to Google Drive video of demo (https://drive.google.com/file/d/1sb68D2c5-sBBMN2MVsJCNHFQh3NtvBrz/view)
-* ![TeamGIF] (team-generator.gif)
+
 
 
 ## Resources
